@@ -121,27 +121,11 @@ function App() {
             items.map(item => (
               <div key={item.id} className={`grocery-item ${item.completed ? 'completed' : ''}`}>
                 <div className="item-content">
-                  <input
-                    type="checkbox"
-                    checked={item.completed}
-                    onChange={() => toggleCompleted(item.id, item.completed)}
-                    className="checkbox"
-                  />
+                  <input type="checkbox" checked={item.completed} onChange={() => toggleCompleted(item.id, item.completed)} className="checkbox"/>
                   <span className="item-name">{item.name}</span>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => updateQuantity(item.id, e.target.value)}
-                    min="1"
-                    className="quantity-display"
-                  />
+                  <input type="number" value={item.quantity} onChange={(e) => updateQuantity(item.id, e.target.value)} min="1" className="quantity-display"/>
+                  <button onClick={() => deleteItem(item.id)} className="delete-button">✕</button>
                 </div>
-                <button 
-                  onClick={() => deleteItem(item.id)}
-                  className="delete-button"
-                >
-                  ✕
-                </button>
               </div>
             ))
           )}
