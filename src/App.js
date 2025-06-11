@@ -97,20 +97,8 @@ function App() {
         <h1>🛒 HZ and PF's Grocery List</h1>
         
         <form onSubmit={addItem} className="add-item-form">
-          <input
-            type="text"
-            value={newItem}
-            onChange={(e) => setNewItem(e.target.value)}
-            placeholder="Enter grocery item..."
-            className="item-input"
-          />
-          <input
-            type="number"
-            value={newQuantity}
-            onChange={(e) => setNewQuantity(e.target.value)}
-            min="1"
-            className="quantity-input"
-          />
+          <input type="text" value={newItem} onChange={(e) => setNewItem(e.target.value)} placeholder="Enter grocery item..." className="item-input"/>
+          <input type="number" value={newQuantity} onChange={(e) => setNewQuantity(e.target.value)} min="1" className="quantity-input"/>
           <button type="submit" className="add-button">Add Item</button>
         </form>
 
