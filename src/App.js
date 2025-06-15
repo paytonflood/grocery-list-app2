@@ -5,7 +5,8 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
-  updateDoc
+  updateDoc,
+  writeBatch
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import './App.css';
@@ -76,9 +77,32 @@ function App() {
     }
   };
 
+  const resetAllItems = async () => {
+    const completedItems = items.filter(item => item.completed);
+    
+    if (completedItems.length === 0) {
+      return; // No completed items to reset
+    }
+
+    try {
+      const batch = writeBatch(db);
+      
+      completedItems.forEach(item => {
+        const itemRef = doc(db, 'groceryItems', item.id);
+        batch.update(itemRef, { completed: false });
+      });
+      
+      await batch.commit();
+    } catch (error) {
+      console.error('Error resetting items:', error);
+    }
+  };
+
   if (loading) {
     return <div className="loading">Loading HZ & PF's grocery list...</div>;
   }
+
+  const completedCount = items.filter(item => item.completed).length;
 
   return (
     <div className="App">
@@ -101,6 +125,12 @@ function App() {
           <input type="number" value={newQuantity} onChange={(e) => setNewQuantity(e.target.value)} min="1" className="quantity-input"/>
           <button type="submit" className="add-button">Add Item</button>
         </form>
+
+        {completedCount > 0 && (
+          <button onClick={resetAllItems} className="reset-button">
+            Reset All
+          </button>
+        )}
 
         <div className="grocery-list">
           {items.length === 0 ? (

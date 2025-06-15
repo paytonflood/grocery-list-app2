@@ -163,6 +163,33 @@ h1 {
   transform: translateY(0px);
 }
 
+.reset-button {
+  width: 100%;
+  padding: 18px 24px;
+  background: rgb(18, 93, 13);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(18, 93, 13, 0.3);
+  box-sizing: border-box;
+  margin-bottom: 25px;
+}
+
+.reset-button:hover,
+.reset-button:active {
+  background: rgba(18, 93, 13, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(18, 93, 13, 0.4);
+}
+
+.reset-button:active {
+  transform: translateY(0px);
+}
+
 .grocery-list {
   display: flex;
   flex-direction: column;
